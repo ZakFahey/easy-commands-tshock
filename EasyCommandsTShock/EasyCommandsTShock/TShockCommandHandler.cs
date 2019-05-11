@@ -12,7 +12,7 @@ namespace EasyCommandsTShock
         {
             Context.TextOptions.CommandPrefix = TShock.Config.CommandSpecifier;
             AddParsingRules(typeof(DefaultParsingRules<TSPlayer>));
-            AddParsingRules(typeof(TShockParsingRules<TSPlayer>));
+            AddParsingRules(typeof(TShockParsingRules));
         }
 
         protected override Type CommandRepositoryToUse() => typeof(TShockCommandRepository);

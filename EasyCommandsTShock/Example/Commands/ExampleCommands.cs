@@ -5,11 +5,12 @@ using EasyCommands;
 using TerrariaApi.Server;
 using Terraria;
 using EasyCommandsTShock;
+using Microsoft.Xna.Framework;
 using Command = EasyCommands.Command;
 
 namespace Example.Commands
 {
-    class PlayerCommands : CommandCallbacks<TSPlayer>
+    class ExampleCommands : CommandCallbacks<TSPlayer>
     {
         [Command("sendsillymessage")]
         [HelpText("Sends a very silly message to another player.")]
@@ -30,6 +31,13 @@ namespace Example.Commands
 
             Sender.SendInfoMessage($"[To {player.Name}]: {sillyMessage}");
             player.SendInfoMessage($"[From {Sender.Name}]: {sillyMessage}");
+        }
+
+        [Command("broadcast-color", "bc-color")]
+        [HelpText("Broadcast a message with a certain color.")]
+        public void BroadcastWithColor(Color color, [AllowSpaces]string message)
+        {
+            TShock.Utils.Broadcast(message, color);
         }
     }
 }
