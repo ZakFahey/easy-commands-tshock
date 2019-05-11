@@ -1,9 +1,10 @@
 ﻿using System;
 using TShockAPI;
-using TShockAPI.DB;
 using EasyCommands;
 using TerrariaApi.Server;
 using Terraria;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace EasyCommandsTShock
 {
@@ -39,10 +40,15 @@ namespace EasyCommandsTShock
             };
 
             var helpText = command.GetCustomAttribute<HelpText>();
+            var permissions = command.GetCustomAttribute<CommandPermissions>();
+            var allowServer = command.GetCustomAttribute<AllowServer>();
+            var doLog = command.GetCustomAttribute<DoLog>();
 
-            var tshockCommand = new TShockAPI.Command(commandDelegate, names)
+            var tshockCommand = new TShockAPI.Command(permissions != null ? permissions.Permissions.ToList() : new List<string>(), commandDelegate, names)
             {
-                HelpText = $"{(helpText != null ? helpText.Documentation : "")} Syntax: {command.SyntaxDocumentation()}"
+                HelpText = $"{(helpText != null ? helpText.Documentation : "")} Syntax: {command.SyntaxDocumentation()}",
+                AllowServer = allowServer != null ? allowServer.Allow : true,
+                DoLog = doLog != null ? doLog.Log : true
             };
 
             Commands.ChatCommands.Add(tshockCommand);

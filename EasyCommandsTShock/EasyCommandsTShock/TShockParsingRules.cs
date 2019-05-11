@@ -12,7 +12,6 @@ namespace EasyCommandsTShock
 {
     class TShockParsingRules : ParsingRules<TSPlayer>
     {
-        //TODO: implement
         //TODO: time of day, team color, item prefix, buff - these are primitive types
 
         [ParseRule]

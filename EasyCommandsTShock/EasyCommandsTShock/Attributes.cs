@@ -17,13 +17,33 @@ namespace EasyCommandsTShock
         }
     }
 
-    public class Permissions : CustomAttribute
+    public class CommandPermissions : CustomAttribute
     {
-        public string Perms { get; private set; }
+        public string[] Permissions { get; private set; }
 
-        public Permissions(string perms)
+        public CommandPermissions(params string[] permissions)
         {
-            Perms = perms;
+            Permissions = permissions;
+        }
+    }
+
+    public class AllowServer : CustomAttribute
+    {
+        public bool Allow { get; private set; }
+
+        public AllowServer(bool allow)
+        {
+            Allow = allow;
+        }
+    }
+
+    public class DoLog : CustomAttribute
+    {
+        public bool Log { get; private set; }
+
+        public DoLog(bool log)
+        {
+            Log = log;
         }
     }
 }
