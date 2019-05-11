@@ -1,4 +1,5 @@
-﻿using EasyCommands;
+﻿using System;
+using EasyCommands;
 using EasyCommands.Defaults;
 using TShockAPI;
 
@@ -9,9 +10,12 @@ namespace EasyCommandsTShock
     {
         protected override void Initialize()
         {
+            Context.TextOptions.CommandPrefix = TShock.Config.CommandSpecifier;
             AddParsingRules(typeof(DefaultParsingRules<TSPlayer>));
             AddParsingRules(typeof(TShockParsingRules<TSPlayer>));
         }
+
+        protected override Type CommandRepositoryToUse() => typeof(TShockCommandRepository);
 
         protected override void SendFailMessage(TSPlayer sender, string message)
         {

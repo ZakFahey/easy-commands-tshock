@@ -4,6 +4,7 @@ using EasyCommands;
 using TerrariaApi.Server;
 using Terraria;
 using System;
+using System.Linq;
 
 namespace EasyCommandsTShock
 {
@@ -16,7 +17,16 @@ namespace EasyCommandsTShock
         [ParseRule]
         public TSPlayer ParsePlayer(string arg)
         {
-            throw new NotImplementedException();
+            var players = TShock.Utils.FindPlayer(arg);
+            if(players.Count == 0)
+            {
+                Fail("Invalid player!", false);
+            }
+            if(players.Count > 1)
+            {
+                Fail("More than one match found:\n" + string.Join(", ", players.Select(p => p.Name)), false);
+            }
+            return players[0];
         }
 
         [ParseRule]
