@@ -7,13 +7,12 @@ using System;
 using System.Linq;
 using Microsoft.Xna.Framework;
 using System.Globalization;
+using System.Collections.Generic;
 
 namespace EasyCommandsTShock
 {
     class TShockParsingRules : ParsingRules<TSPlayer>
     {
-        //TODO: time of day, team color, item prefix, buff - these are primitive types
-
         [ParseRule]
         public TSPlayer ParsePlayer(string arg)
         {
@@ -128,6 +127,70 @@ namespace EasyCommandsTShock
             // Nothing works, so invalid argument
             Fail("{0} must be a valid color! You can use a color name, comma-separated RGB triplet, or hex value.");
             return new Color();
+        }
+        
+        [ParseRule]
+        public int ParseTeam(string arg, TeamColor attributeOverride)
+        {
+            switch(arg.ToLower())
+            {
+                case "none":
+                case "white": return 0;
+                case "red": return 1;
+                case "green": return 2;
+                case "blue": return 3;
+                case "yellow": return 4;
+                case "pink": return 5;
+            }
+            Fail("Invalid syntax! {0} must be a team color!");
+            return -1;
+        }
+
+        [ParseRule]
+        public int ParseItemPrefix(string arg, ItemPrefix attributeOverride)
+        {
+            /* TODO: in TShock's implementation, there's this check:
+            
+            if (item.accessory && prefixIds.Contains(PrefixID.Quick))
+				{
+					prefixIds.Remove(PrefixID.Quick);
+					prefixIds.Remove(PrefixID.Quick2);
+					prefixIds.Add(PrefixID.Quick2);
+				}
+				else if (!item.accessory && prefixIds.Contains(PrefixID.Quick))
+					prefixIds.Remove(PrefixID.Quick2);
+             
+            Is it necessary to remove this? And if so, how do you get the item context? */
+
+            List<int> prefixes = TShock.Utils.GetPrefixByIdOrName(arg);
+            if(prefixes.Count == 0)
+            {
+                Fail($"No prefix matched \"{arg}\".", false);
+            }
+            if(prefixes.Count > 1)
+            {
+                Fail("More than one match found:\n" + string.Join(", ", prefixes), false);
+            }
+            if(prefixes[0] <= 0 || prefixes[0] >= Main.maxBuffTypes)
+            {
+                Fail("Invalid buff ID!");
+            }
+            return prefixes[0];
+        }
+
+        [ParseRule]
+        public int ParseBuff(string arg, Buff attributeOverride)
+        {
+            List<int> buffs = TShock.Utils.GetBuffByName(arg);
+            if(buffs.Count == 0)
+            {
+                Fail("Invalid buff name!", false);
+            }
+            else if(buffs.Count > 1)
+            {
+                Fail("More than one match found:\n" + string.Join(", ", buffs.Select(f => Lang.GetBuffName(f))), false);
+            }
+            return buffs[0];
         }
     }
 }
