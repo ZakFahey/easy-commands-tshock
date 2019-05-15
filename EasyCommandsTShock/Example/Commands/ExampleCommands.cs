@@ -8,12 +8,13 @@ using EasyCommandsTShock;
 using Microsoft.Xna.Framework;
 using Command = EasyCommands.Command;
 using System.Linq;
+using TShockAPI.Localization;
 
 namespace Example.Commands
 {
     class ExampleCommands : CommandCallbacks<TSPlayer>
     {
-        //TODO: example commands demonstrating subcommands, User parse rule, Item parse rule, Group parse rule, NPC parse rule, Region parse rule, 
+        //TODO: example commands demonstrating Group parse rule, buffs
 
         [Command("sendsillymessage")]
         [HelpText("Sends a very silly message to another player.")]
@@ -90,6 +91,55 @@ namespace Example.Commands
             {
                 int count = Main.npc.Count(n => n != null && n.active && n.type == type.type);
                 Sender.SendInfoMessage($"There {(count == 1 ? "is" : "are")} {count} {type.FullName} NPC{(count == 1 ? "" : "s")} on the server.");
+            }
+        }
+
+        [Command("playersonteam", "pot")]
+        [HelpText("Lists the number of players on a given team.")]
+        public void GetNumPlayersOnTeam([TeamColor]int team)
+        {
+            string CommandNumberToName(int num)
+            {
+                switch(num)
+                {
+                    case 0: return "white";
+                    case 1: return "red";
+                    case 2: return "green";
+                    case 3: return "blue";
+                    case 4: return "yellow";
+                    case 5: return "pink";
+                    default: return null;
+                }
+            }
+
+            int count = TShock.Players.Count(p => p != null && p.Active && p.Team == team);
+            Sender.SendInfoMessage($"There {(count == 1 ? "is" : "are")} {count} player{(count == 1 ? "" : "s")} on the {CommandNumberToName(team)} team.");
+        }
+
+        [Command("ips")]
+        [HelpText("Lists the IP addresses associated with a user.")]
+        public void ListIPs([AllowSpaces]User user)
+        {
+            Sender.SendInfoMessage($"{user.Name}'s IPs: {user.KnownIps}");
+        }
+
+        [Command("easy-give")]
+        [CommandPermissions("tshock.item.give")]
+        [HelpText("Gives another player an item.")]
+        public void Give(Item item, TSPlayer player, int amount = 0, [ItemPrefix]int prefix = 0)
+        {
+            if(amount == 0 || amount > item.maxStack)
+            {
+                amount = item.maxStack;
+            }
+            if(player.GiveItemCheck(item.type, EnglishLanguage.GetItemNameById(item.type), item.width, item.height, amount, prefix))
+            {
+                Sender.SendSuccessMessage(string.Format("Gave {0} {1} {2}(s).", player.Name, amount, item.Name));
+                player.SendSuccessMessage(string.Format("{0} gave you {1} {2}(s).", Sender.Name, amount, item.Name));
+            }
+            else
+            {
+                Fail("You cannot spawn banned items.");
             }
         }
     }

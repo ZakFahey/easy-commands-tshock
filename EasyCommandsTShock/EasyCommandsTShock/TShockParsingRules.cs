@@ -51,6 +51,10 @@ namespace EasyCommandsTShock
             {
                 Fail("More than one match found:\n" + string.Join(", ", items.Select(i => i.Name)), false);
             }
+            if(items[0].type < 1 || items[0].type >= Main.maxItemTypes)
+            {
+                Fail("Invalid item type!");
+            }
             return items[0];
         }
 
@@ -149,7 +153,7 @@ namespace EasyCommandsTShock
         [ParseRule]
         public int ParseItemPrefix(string arg, ItemPrefix attributeOverride)
         {
-            /* TODO: in TShock's implementation, there's this check:
+            /* TODO: In TShock's implementation, there's this check:
             
             if (item.accessory && prefixIds.Contains(PrefixID.Quick))
 				{
