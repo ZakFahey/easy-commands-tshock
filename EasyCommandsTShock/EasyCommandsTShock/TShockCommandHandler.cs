@@ -2,7 +2,7 @@
 using EasyCommands;
 using EasyCommands.Defaults;
 using TShockAPI;
-
+using System.Linq;
 
 namespace EasyCommandsTShock
 {
@@ -20,6 +20,15 @@ namespace EasyCommandsTShock
         protected override void SendFailMessage(TSPlayer sender, string message)
         {
             sender.SendErrorMessage(message);
+        }
+
+        public override void PreCheck(TSPlayer sender, CommandDelegate<TSPlayer> command)
+        {
+            CommandPermissions permissions = command.GetCustomAttribute<CommandPermissions>();
+            if(permissions != null && permissions.Permissions.Any(p => !sender.HasPermission(p)))
+            {
+                Fail("You don't have the necessary permission to do that.");
+            }
         }
     }
 }
