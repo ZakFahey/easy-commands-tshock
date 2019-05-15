@@ -25,6 +25,8 @@ namespace EasyCommandsTShock
         public override void PreCheck(TSPlayer sender, CommandDelegate<TSPlayer> command)
         {
             CommandPermissions permissions = command.GetCustomAttribute<CommandPermissions>();
+
+            // Stop a user from running a command or subcommand if they don't have permission to use it
             if(permissions != null && permissions.Permissions.Any(p => !sender.HasPermission(p)))
             {
                 Fail("You don't have the necessary permission to do that.");
