@@ -7,6 +7,7 @@ using Terraria;
 using EasyCommandsTShock;
 using Microsoft.Xna.Framework;
 using Command = EasyCommands.Command;
+using System.Linq;
 
 namespace Example.Commands
 {
@@ -74,6 +75,22 @@ namespace Example.Commands
             }
 
             teleporting.Teleport(target.TPlayer.position.X, target.TPlayer.position.Y);
+        }
+
+        [Command("num-npcs", "num-mobs")]
+        [HelpText("Gets the number of npcs for a certain type.")]
+        public void GetNumNPCs([AllowSpaces]NPC type = null)
+        {
+            if(type == null)
+            {
+                int count = Main.npc.Count(n => n != null && n.active);
+                Sender.SendInfoMessage($"There {(count == 1 ? "is" : "are")} {count} NPC{(count == 1 ? "" : "s")} on the server.");
+            }
+            else
+            {
+                int count = Main.npc.Count(n => n != null && n.active && n.type == type.type);
+                Sender.SendInfoMessage($"There {(count == 1 ? "is" : "are")} {count} {type.FullName} NPC{(count == 1 ? "" : "s")} on the server.");
+            }
         }
     }
 }
