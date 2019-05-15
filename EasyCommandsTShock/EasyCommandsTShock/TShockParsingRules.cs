@@ -171,10 +171,6 @@ namespace EasyCommandsTShock
             {
                 Fail("More than one match found:\n" + string.Join(", ", prefixes), false);
             }
-            if(prefixes[0] <= 0 || prefixes[0] >= Main.maxBuffTypes)
-            {
-                Fail("Invalid buff ID!");
-            }
             return prefixes[0];
         }
 
@@ -189,6 +185,10 @@ namespace EasyCommandsTShock
             else if(buffs.Count > 1)
             {
                 Fail("More than one match found:\n" + string.Join(", ", buffs.Select(f => Lang.GetBuffName(f))), false);
+            }
+            if(buffs[0] <= 0 || buffs[0] >= Main.maxBuffTypes)
+            {
+                Fail("Invalid buff ID!");
             }
             return buffs[0];
         }
