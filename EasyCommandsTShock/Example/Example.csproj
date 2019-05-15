@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Commands\ExampleCommands.cs" />
     <Compile Include="Commands\MathCommands.cs" />
+    <Compile Include="Commands\RegionCommands.cs" />
     <Compile Include="Plugin.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
