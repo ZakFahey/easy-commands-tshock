@@ -14,8 +14,6 @@ namespace Example.Commands
 {
     class ExampleCommands : CommandCallbacks<TSPlayer>
     {
-        //TODO: example commands demonstrating Group parse rule, buffs
-
         [Command("sendsillymessage")]
         [HelpText("Sends a very silly message to another player.")]
         public void SendSillyMessage(TSPlayer player, [AllowSpaces]string message)
@@ -141,6 +139,26 @@ namespace Example.Commands
             {
                 Fail("You cannot spawn banned items.");
             }
+        }
+
+        [Command]
+        [CommandPermissions("tshock.buff.others")]
+        [HelpText("Gives all players in the specified group a buff.")]
+        public void BuffGroup(Group group, [Buff]int buff, [ParamName("time (seconds)")]int time = 3600)
+        {
+            foreach(TSPlayer player in TShock.Players)
+            {
+                if(player != null && player.Active && player.Group == group)
+                {
+                    player.SetBuff(buff, time * 60);
+                    player.SendSuccessMessage(string.Format("{0} has buffed you with {1}({2}) for {3} seconds!",
+                                                            Sender.Name, TShock.Utils.GetBuffName(buff),
+                                                            TShock.Utils.GetBuffDescription(buff), (time)));
+                }
+            }
+            Sender.SendSuccessMessage(string.Format("You have buffed {0} with {1}({2}) for {3} seconds!",
+                                                    group.Name, TShock.Utils.GetBuffName(buff),
+                                                    TShock.Utils.GetBuffDescription(buff), (time)));
         }
     }
 }
