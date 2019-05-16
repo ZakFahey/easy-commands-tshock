@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>1.0</version>
+    <title>EasyCommands-TShock</title>
+    <authors>Zak Fahey</authors>
+    <owners>Zak Fahey</owners>
+    <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>https://github.com/ZakFahey/easy-commands-tshock</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Simplifies writing commands for TShock plugins</description>
+    <releaseNotes>Initial release</releaseNotes>
+    <copyright>Copyright 2019</copyright>
+    <tags>easy commands easycommands TShock zak fahey Terraria plugin</tags>
+  </metadata>
+</package>
