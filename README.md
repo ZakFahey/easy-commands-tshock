@@ -132,6 +132,8 @@ Install-Package EasyCommands
 Install-Package EasyCommandsTShock
 ```
 
+When you run your plugin, you will need to copy `EasyCommands.dll` and `EasyCommandsTShock.dll` into your `ServerPlugins` folder as well as your own plugin.
+
 ## How to use
 This library is an extension of my accompanying, more general-purpose library, [Easy Commands](https://github.com/ZakFahey/easy-commands). Read up on the [documentation](https://github.com/ZakFahey/easy-commands/tree/master/Documentation) there to get a more in-depth view of how everything works. You can also view the Example project in this repository to see the code in action.
 
