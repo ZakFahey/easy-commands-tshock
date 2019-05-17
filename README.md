@@ -2,7 +2,7 @@
 
 Has this ever happened to you?
 
-![Literally just TShock's code](code.png)
+![Literally just TShock's code](https://raw.githubusercontent.com/ZakFahey/easy-commands-tshock/master/code.png)
 
 Well then you may be interested in this library. It removes the boilerplate of writing code for TShock commands by handling input parsing and validation for you so that you can focus on what's important. Essentially, you make a method, and the arguments of the method generate the arguments of the command. You can make optional commands, subcommands, and commands with multi-word arguments that don't require quotes. It lets you go from this:
 ```
