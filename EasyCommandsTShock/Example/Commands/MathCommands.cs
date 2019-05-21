@@ -2,6 +2,7 @@
 using TShockAPI;
 using TShockAPI.DB;
 using EasyCommands;
+using EasyCommands.Commands;
 using TerrariaApi.Server;
 using Terraria;
 using EasyCommandsTShock;

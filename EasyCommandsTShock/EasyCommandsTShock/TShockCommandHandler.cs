@@ -1,6 +1,7 @@
 ﻿using System;
 using EasyCommands;
 using EasyCommands.Defaults;
+using EasyCommands.Commands;
 using TShockAPI;
 using System.Linq;
 

@@ -8,6 +8,7 @@ using System.Linq;
 using Microsoft.Xna.Framework;
 using System.Globalization;
 using System.Collections.Generic;
+using EasyCommands.Arguments;
 
 namespace EasyCommandsTShock
 {

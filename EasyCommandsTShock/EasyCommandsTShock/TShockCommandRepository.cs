@@ -1,6 +1,7 @@
 ﻿using System;
 using TShockAPI;
 using EasyCommands;
+using EasyCommands.Commands;
 using TerrariaApi.Server;
 using Terraria;
 using System.Collections.Generic;

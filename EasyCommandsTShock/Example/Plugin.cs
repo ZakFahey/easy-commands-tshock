@@ -26,6 +26,7 @@ namespace Example
         public override void Initialize()
         {
             CommandHandler = new TShockCommandHandler();
+            CommandHandler.AddFlagRule(typeof(ExampleFlags));
             CommandHandler.RegisterCommands("Example.Commands");
         }
     }

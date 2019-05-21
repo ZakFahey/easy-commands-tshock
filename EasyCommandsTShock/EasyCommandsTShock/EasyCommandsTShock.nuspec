@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>$id$</id>
-    <version>1.0</version>
+    <version>1.1</version>
     <title>EasyCommands-TShock</title>
     <authors>Zak Fahey</authors>
     <owners>Zak Fahey</owners>
@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/ZakFahey/easy-commands-tshock</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Simplifies writing commands for TShock plugins</description>
-    <releaseNotes>Initial release</releaseNotes>
+    <releaseNotes>Update to EasyCommands version 1.1, which added flags and allowed the use of string[] for the first argument of parsing rules.</releaseNotes>
     <copyright>Copyright 2019</copyright>
     <tags>easy commands easycommands TShock zak fahey Terraria plugin</tags>
   </metadata>
