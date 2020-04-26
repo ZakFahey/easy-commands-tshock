@@ -27,6 +27,12 @@ namespace EasyCommandsTShock
         {
             CommandPermissions permissions = command.GetCustomAttribute<CommandPermissions>();
 
+            // Stop the server from running a command if he's not allowed to, it's allowed by default
+            if (command.GetCustomAttribute<AllowServer>()?.Allow == false)
+            {
+                Fail("The server doesn't have the permission to execute this command.");
+            }
+
             // Stop a user from running a command or subcommand if they don't have permission to use it
             if(permissions != null && permissions.Permissions.Any(p => !sender.HasPermission(p)))
             {
