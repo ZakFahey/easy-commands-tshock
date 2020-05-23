@@ -25,6 +25,12 @@ namespace EasyCommandsTShock
 
         public override void PreCheck(TSPlayer sender, CommandDelegate<TSPlayer> command)
         {
+            // Stop the server from running a command if he's not allowed to, it's allowed by default
+            if (sender is TSServerPlayer && command.GetCustomAttribute<AllowServer>()?.Allow == false)
+            {
+                Fail("The server doesn't have the permission to execute this command.");
+            }
+
             CommandPermissions permissions = command.GetCustomAttribute<CommandPermissions>();
 
             // Stop a user from running a command or subcommand if they don't have permission to use it
