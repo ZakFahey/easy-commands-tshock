@@ -117,7 +117,7 @@ namespace Example.Commands
 
         [Command("ips")]
         [HelpText("Lists the IP addresses associated with a user.")]
-        public void ListIPs([AllowSpaces]User user)
+        public void ListIPs([AllowSpaces]UserAccount user)
         {
             Sender.SendInfoMessage($"{user.Name}'s IPs: {user.KnownIps}");
         }
@@ -131,7 +131,7 @@ namespace Example.Commands
             {
                 amount = item.maxStack;
             }
-            if(player.GiveItemCheck(item.type, EnglishLanguage.GetItemNameById(item.type), item.width, item.height, amount, prefix))
+            if(player.GiveItemCheck(item.type, EnglishLanguage.GetItemNameById(item.type), amount, prefix))
             {
                 Sender.SendSuccessMessage(string.Format("Gave {0} {1} {2}(s).", player.Name, amount, item.Name));
                 player.SendSuccessMessage(string.Format("{0} gave you {1} {2}(s).", Sender.Name, amount, item.Name));

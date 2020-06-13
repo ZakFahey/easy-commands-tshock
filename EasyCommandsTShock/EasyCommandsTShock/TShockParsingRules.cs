@@ -17,7 +17,7 @@ namespace EasyCommandsTShock
         [ParseRule]
         public TSPlayer ParsePlayer(string arg)
         {
-            var players = TShock.Utils.FindPlayer(arg);
+            var players = TSPlayer.FindByNameOrID(arg);
             if(players.Count == 0)
             {
                 Fail("Invalid player!", false);
@@ -30,9 +30,9 @@ namespace EasyCommandsTShock
         }
 
         [ParseRule]
-        public User ParseUser(string arg)
+        public UserAccount ParseUser(string arg)
         {
-            User user = TShock.Users.GetUserByName(arg);
+            UserAccount user = TShock.UserAccounts.GetUserAccountByName(arg);
             if(user == null)
             {
                 Fail($"User {arg} does not exist.", false);

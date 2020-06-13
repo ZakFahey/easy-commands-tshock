@@ -32,7 +32,7 @@ namespace Example.Commands
             {
                 IEnumerable<string> sharedUsersSelector = region.AllowedIDs.Select(userId =>
                 {
-                    User user = TShock.Users.GetUserByID(userId);
+                    UserAccount user = TShock.UserAccounts.GetUserAccountByID(userId);
                     if(user != null)
                         return user.Name;
 

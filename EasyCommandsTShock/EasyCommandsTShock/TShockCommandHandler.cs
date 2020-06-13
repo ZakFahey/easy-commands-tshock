@@ -23,6 +23,17 @@ namespace EasyCommandsTShock
             sender.SendErrorMessage(message);
         }
 
+        protected override void HandleCommandException(Exception e)
+        {
+            TShock.Log.Error(e.ToString());
+        }
+
+        public override bool CanSeeCommand(TSPlayer sender, CommandDelegate<TSPlayer> command)
+        {
+            var permissions = command.GetCustomAttribute<CommandPermissions>();
+            return permissions == null || permissions.Permissions.Any(perm => sender.Group.HasPermission(perm));
+        }
+
         public override void PreCheck(TSPlayer sender, CommandDelegate<TSPlayer> command)
         {
             // Stop the server from running a command if he's not allowed to, it's allowed by default
