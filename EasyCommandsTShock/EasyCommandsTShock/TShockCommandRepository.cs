@@ -39,6 +39,11 @@ namespace EasyCommandsTShock
                 {
                     args.Player.SendErrorMessage(e.Message);
                 }
+                catch (Exception e)
+                {
+                    TShock.Log.Error(e.ToString());
+                    args.Player.SendErrorMessage(Context.TextOptions.CommandThrewException);
+                }
             };
 
             var helpText = command.GetCustomAttribute<HelpText>();
