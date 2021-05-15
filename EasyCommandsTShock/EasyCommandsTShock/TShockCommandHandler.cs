@@ -11,7 +11,7 @@ namespace EasyCommandsTShock
     {
         protected override void Initialize()
         {
-            Context.TextOptions.CommandPrefix = TShock.Config.CommandSpecifier;
+            Context.TextOptions.CommandPrefix = TShock.Config.Settings.CommandSpecifier;
             AddParsingRules(typeof(DefaultParsingRules<TSPlayer>));
             AddParsingRules(typeof(TShockParsingRules));
         }
