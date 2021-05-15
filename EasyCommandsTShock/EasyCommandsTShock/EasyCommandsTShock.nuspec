@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>EasyCommandsTShock</id>
-    <version>1.2.2</version>
+    <version>1.2.3</version>
     <title>EasyCommands for TShock</title>
     <authors>Zak Fahey</authors>
     <owners>Zak Fahey</owners>
@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/ZakFahey/easy-commands-tshock</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Simplifies writing commands for TShock plugins</description>
-    <releaseNotes>Update to latest EasyCommands version</releaseNotes>
+    <releaseNotes>Upgrade to the latest TShock version</releaseNotes>
     <copyright>Copyright 2020</copyright>
     <tags>easy commands easycommands TShock zak fahey Terraria plugin</tags>
     <dependencies>
