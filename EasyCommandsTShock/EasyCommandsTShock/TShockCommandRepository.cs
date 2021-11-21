@@ -51,7 +51,7 @@ namespace EasyCommandsTShock
             var allowServer = command.GetCustomAttribute<AllowServer>();
             var doLog = command.GetCustomAttribute<DoLog>();
 
-            var tshockCommand = new TShockAPI.Command(permissions != null ? permissions.Permissions.ToList() : new List<string>(), commandDelegate, names)
+            var tshockCommand = new TShockAPI.Command(permissions != null ? permissions.Permissions.ToList() : new List<string>() { "tshock."}, commandDelegate, names)
             {
                 HelpText = $"{(helpText != null ? helpText.Documentation : "")} Syntax: {command.SyntaxDocumentation(TSPlayer.Server)}",
                 AllowServer = allowServer != null ? allowServer.Allow : true,
