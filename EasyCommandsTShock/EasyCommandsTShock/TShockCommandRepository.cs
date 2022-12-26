@@ -2,15 +2,13 @@
 using TShockAPI;
 using EasyCommands;
 using EasyCommands.Commands;
-using TerrariaApi.Server;
-using Terraria;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace EasyCommandsTShock
 {
-    class TShockCommandRepository : CommandRepository<TSPlayer>
+    public class TShockCommandRepository : CommandRepository<TSPlayer>
     {
         public TShockCommandRepository(Context<TSPlayer> context) : base(context) { }
 
