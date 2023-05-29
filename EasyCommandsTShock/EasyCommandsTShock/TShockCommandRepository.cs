@@ -17,6 +17,13 @@ namespace EasyCommandsTShock
             Commands.HandleCommand(sender, command);
         }
 
+        /// <summary> Handles when a command throws an unexpected exception. </summary>
+        protected virtual void HandleCommandException(CommandArgs args, Exception e)
+        {
+            TShock.Log.Error(e.ToString());
+            args.Player.SendErrorMessage(Context.TextOptions.CommandThrewException);
+        }
+
         protected override void AddCommand(CommandDelegate<TSPlayer> command, string[] names)
         {
             CommandDelegate commandDelegate = async (CommandArgs args) =>
@@ -39,8 +46,7 @@ namespace EasyCommandsTShock
                 }
                 catch (Exception e)
                 {
-                    TShock.Log.Error(e.ToString());
-                    args.Player.SendErrorMessage(Context.TextOptions.CommandThrewException);
+                    HandleCommandException(args, e);
                 }
             };
 
