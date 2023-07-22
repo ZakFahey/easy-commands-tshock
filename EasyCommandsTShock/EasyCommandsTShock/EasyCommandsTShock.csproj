@@ -12,6 +12,6 @@
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="EasyCommands" Version="1.2.5.1" />
+    <PackageReference Include="EasyCommands" Version="1.2.5.2" />
   </ItemGroup>
 </Project>
