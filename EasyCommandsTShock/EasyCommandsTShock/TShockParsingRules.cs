@@ -1,14 +1,13 @@
-﻿using TShockAPI;
-using TShockAPI.DB;
-using EasyCommands;
-using TerrariaApi.Server;
-using Terraria;
-using System;
-using System.Linq;
-using Microsoft.Xna.Framework;
+﻿using System.Collections.Generic;
 using System.Globalization;
-using System.Collections.Generic;
+using System.Linq;
+using EasyCommands;
 using EasyCommands.Arguments;
+using Microsoft.Xna.Framework;
+using Terraria;
+using Terraria.ID;
+using TShockAPI;
+using TShockAPI.DB;
 
 namespace EasyCommandsTShock
 {
@@ -52,7 +51,7 @@ namespace EasyCommandsTShock
             {
                 Fail("More than one match found:\n" + string.Join(", ", items.Select(i => i.Name)), false);
             }
-            if(items[0].type < 1 || items[0].type >= Main.maxItemTypes)
+            if(items[0].type < 1 || items[0].type >= ItemID.Count)
             {
                 Fail("Invalid item type!");
             }
@@ -191,7 +190,7 @@ namespace EasyCommandsTShock
             {
                 Fail("More than one match found:\n" + string.Join(", ", buffs.Select(f => Lang.GetBuffName(f))), false);
             }
-            if(buffs[0] <= 0 || buffs[0] >= Main.maxBuffTypes)
+            if(buffs[0] <= 0 || buffs[0] >= BuffID.Count)
             {
                 Fail("Invalid buff ID!");
             }
