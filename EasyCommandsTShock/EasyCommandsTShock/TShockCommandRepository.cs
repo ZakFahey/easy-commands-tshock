@@ -17,11 +17,26 @@ namespace EasyCommandsTShock
             Commands.HandleCommand(sender, command);
         }
 
+        /// <summary>
+        /// Sends an error message to a player, splitting it by lines and sending each line separately.
+        /// If a single chat message exceeds 10 lines, Terraria will truncate it, so we need to send it one line at a time.
+        /// </summary>
+        /// <param name="player">The player to send the error message to.</param>
+        /// <param name="message">The error message to send.</param>
+        private void SendErrorMessageByLine(TSPlayer player, string message)
+        {
+            var lines = message.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None);
+            foreach (var line in lines)
+            {
+                player.SendErrorMessage(line);
+            }
+        }
+
         /// <summary> Handles when a command throws an unexpected exception. </summary>
         protected virtual void HandleCommandException(CommandArgs args, Exception e)
         {
             TShock.Log.Error(e.ToString());
-            args.Player.SendErrorMessage(Context.TextOptions.CommandThrewException);
+            SendErrorMessageByLine(args.Player, Context.TextOptions.CommandThrewException);
         }
 
         protected override void AddCommand(CommandDelegate<TSPlayer> command, string[] names)
@@ -38,11 +53,11 @@ namespace EasyCommandsTShock
                 // TShock's command system does its own exception handling, so we have to catch error messages here.
                 catch(CommandParsingException e)
                 {
-                    args.Player.SendErrorMessage(e.Message);
+                    SendErrorMessageByLine(args.Player, e.Message);
                 }
                 catch(CommandExecutionException e)
                 {
-                    args.Player.SendErrorMessage(e.Message);
+                    SendErrorMessageByLine(args.Player, e.Message);
                 }
                 catch (Exception e)
                 {
